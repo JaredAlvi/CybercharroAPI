@@ -6,10 +6,10 @@ const port = 3300;
 
 // Configura la conexión a la base de datos MySQL
 const connection = mysql.createConnection({
-  host: '52.41.36.82',
-  user: 'root',
-  password: '',
-  database: 'CYBERCHARRO'
+  host: b3atwg3pdsmwf2r1yjo0-mysql.services.clever-cloud.com,
+  user: 'uutadvemmgazlvfq',
+  password: 'wmcO0trHmSIzLDooGIlQ',
+  database: 'b3atwg3pdsmwf2r1yjo0'
 });
 
 // Conectar a la base de datos
@@ -68,5 +68,5 @@ app.get('/api/usuarios', (req, res) => {
 
 // Escuchar en el puerto 3000
 app.listen(port, () => {
-  console.log(`Servidor API RESTful escuchando en http://localhost:${port}`);
+  console.log(`Servidor API RESTful escuchando en http://${host}}:${port}`);
 });
