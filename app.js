@@ -68,5 +68,5 @@ app.get('/api/usuarios', (req, res) => {
 
 // Escuchar en el puerto 3000
 app.listen(port, () => {
-  console.log(`Servidor API RESTful escuchando en http://${host}}:${port}`);
+  console.log(`Servidor API RESTful escuchando en http://localhost:${port}`);
 });
