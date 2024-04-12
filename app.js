@@ -41,7 +41,7 @@ app.get('/api/usuarios', (req, res) => {
 
 //Obtener estadisticas
 app.get('/api/estadisticas', (req, res) => {
-    connection.query('SELECT U.USERNAME AS USUARIO, E.TIEMPO_JUGADO AS `TIEMPO JUGADO`, E.ENEMIGOS_DERROTADOS AS `ENEMIGOS ELIMINADOS`, FORMAT(E.PUNTUACION_TOTAL, 0) AS `PUNTUACION TOTAL` FROM USUARIOS U JOIN ESTADISTICAS E ON U.ID_USUARIO = E.ID_USUARIO;', (err, results) => {
+    connection.query('SELECT U.USERNAME, E.TIEMPO_JUGADO, E.ENEMIGOS_DERROTADOS, PUNTUACION_TOTAL FROM USUARIOS U JOIN ESTADISTICAS E ON U.ID_USUARIO = E.ID_USUARIO;', (err, results) => {
       if (err) {
         console.error('Error al obtener usuarios: ', err);
         res.status(500).send('Error del servidor al obtener usuarios');
