@@ -69,6 +69,27 @@ app.post('/api/insertarEstadisticas', (req, res) => {
   });
 });
 
+// Endpoint de login
+app.post('/api/login', (req, res) => {
+  const { username, password } = req.body;
+  if (!username || !password) {
+      return res.status(400).send('Username y Password son requeridos');
+  }
+
+  const query = 'SELECT ID_USUARIO FROM USUARIOS WHERE USERNAME = ? AND PASSWORD = ?';
+  connection.query(query, [username, password], (err, results) => {
+      if (err) {
+          console.error('Error al intentar loguearse: ', err);
+          return res.status(500).send('Error interno del servidor');
+      }
+      if (results.length > 0) {
+          res.json({ idUsuario: results[0].ID_USUARIO });
+      } else {
+          res.status(401).send('Credenciales no válidas');
+      }
+  });
+});
+
 
 // Escuchar en el puerto 3000
 app.listen(port, () => {
