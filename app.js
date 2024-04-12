@@ -4,12 +4,11 @@ const mysql = require('mysql');
 const app = express();
 const port = 3300;
 
-const cors = require('cors');
-// Habilitar CORS para todos los orígenes (para desarrollo; ajustar según necesidad para producción)
-app.use(cors());
-
 // Middleware para parsear JSON
 app.use(express.json());
+
+const cors = require('cors');
+app.use(cors());
 
 // Configura la conexión a la base de datos MySQL
 const connection = mysql.createConnection({
