@@ -1,11 +1,11 @@
 const express = require('express');
 const mysql = require('mysql');
 
-// Middleware para parsear JSON
-app.use(express.json());
-
 const app = express();
 const port = 3300;
+
+// Middleware para parsear JSON
+app.use(express.json());
 
 // Configura la conexión a la base de datos MySQL
 const connection = mysql.createConnection({
