@@ -1,14 +1,12 @@
 const express = require('express');
 const mysql = require('mysql');
 
-const cors = require('cors');
-
-// Habilitar CORS para todos los orígenes (para desarrollo; ajustar según necesidad para producción)
-app.use(cors());
-
-
 const app = express();
 const port = 3300;
+
+const cors = require('cors');
+// Habilitar CORS para todos los orígenes (para desarrollo; ajustar según necesidad para producción)
+app.use(cors());
 
 // Middleware para parsear JSON
 app.use(express.json());
