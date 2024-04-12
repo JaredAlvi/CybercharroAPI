@@ -21,7 +21,7 @@ connection.connect((err) => {
   console.log('Conexión a la base de datos MySQL establecida');
 });
 
-// Definir rutas
+//Obtener todos los usuarios
 app.get('/api/usuarios', (req, res) => {
   connection.query('SELECT * FROM USUARIOS', (err, results) => {
     if (err) {
@@ -33,8 +33,9 @@ app.get('/api/usuarios', (req, res) => {
   });
 });
 
-app.get('/api/usuarios', (req, res) => {
-    connection.query('SELECT * FROM USUARIOS', (err, results) => {
+//Obtener estadisticas
+app.get('/api/estadisticas', (req, res) => {
+    connection.query('SELECT U.USERNAME AS USUARIO, E.TIEMPO_JUGADO AS `TIEMPO JUGADO`, E.ENEMIGOS_DERROTADOS AS `ENEMIGOS ELIMINADOS`, FORMAT(E.PUNTUACION_TOTAL, 0) AS `PUNTUACION TOTAL` FROM USUARIOS U JOIN ESTADISTICAS E ON U.ID_USUARIO = E.ID_USUARIO;', (err, results) => {
       if (err) {
         console.error('Error al obtener usuarios: ', err);
         res.status(500).send('Error del servidor al obtener usuarios');
@@ -44,27 +45,6 @@ app.get('/api/usuarios', (req, res) => {
     });
   });
 
-  app.get('/api/estadisticas', (req, res) => {
-    connection.query('SELECT * FROM ESTADISTICAS', (err, results) => {
-      if (err) {
-        console.error('Error al obtener usuarios: ', err);
-        res.status(500).send('Error del servidor al obtener usuarios');
-        return;
-      }
-      res.json(results);
-    });
-  });
-
-  app.post('/api/usuarios', (req, res) => {
-    connection.query('SELECT * FROM USUARIOS', (err, results) => {
-      if (err) {
-        console.error('Error al obtener usuarios: ', err);
-        res.status(500).send('Error del servidor al obtener usuarios');
-        return;
-      }
-      res.json(results);
-    });
-  });
 
 // Escuchar en el puerto 3000
 app.listen(port, () => {
