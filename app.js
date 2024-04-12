@@ -45,6 +45,27 @@ app.get('/api/estadisticas', (req, res) => {
     });
   });
 
+  // Endpoint para insertar o actualizar estadísticas
+app.post('/api/insertarEstadisticas', (req, res) => {
+  const { id_usuario, puntuacion_total, enemigos_derrotados, tiempo_jugado } = req.body;
+  const query = `
+    INSERT INTO ESTADISTICAS (ID_USUARIO, PUNTUACION_TOTAL, ENEMIGOS_DERROTADOS, TIEMPO_JUGADO)
+    VALUES (?, ?, ?, ?)
+    ON DUPLICATE KEY UPDATE
+      PUNTUACION_TOTAL = VALUES(PUNTUACION_TOTAL),
+      ENEMIGOS_DERROTADOS = VALUES(ENEMIGOS_DERROTADOS),
+      TIEMPO_JUGADO = VALUES(TIEMPO_JUGADO);
+  `;
+  connection.query(query, [id_usuario, puntuacion_total, enemigos_derrotados, tiempo_jugado], (err, results) => {
+    if (err) {
+      console.error('Error al insertar o actualizar estadísticas: ', err);
+      res.status(500).send('Error del servidor al actualizar estadísticas');
+      return;
+    }
+    res.status(200).send('Estadísticas actualizadas con éxito');
+  });
+});
+
 
 // Escuchar en el puerto 3000
 app.listen(port, () => {
